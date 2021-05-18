@@ -1,8 +1,48 @@
 <html>
+<!--This is index.html-->
 
 <head>
+    <title>Breast Cancer Detection</title>
     <style type=text/css>
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+        .custom-file-input {
+            color: transparent;
+        }
+
+        .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+
+        .custom-file-input::before {
+            content: 'Select some files';
+            color: black;
+            display: inline-block;
+            background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+            border: 1px solid #999;
+            border-radius: 3px;
+            padding: 5px 8px;
+            outline: none;
+            white-space: nowrap;
+            -webkit-user-select: none;
+            cursor: pointer;
+        }
+
+        .custom-file-input:hover::before {
+            border-color: black;
+        }
+
+        .custom-file-input:active {
+            outline: 0;
+        }
+
+        .custom-file-input:active::before {
+            background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+        }
+
+        body {
+            padding: 20px;
+        }
 
         * {
             box-sizing: border-box;
@@ -164,18 +204,20 @@
     <img id="preview" style='position:absolute; left:50%;top:50%; transform: translate(-50%,-50%); max-width:100%' width=auto height=400 src="/1" />
     <br><br>
 
-<body>
+    <body>
         <form style=' position:absolute; left:50%;top:85%; transform: translate(-50%,-50%);' action="http://127.0.0.1:5000/upload" enctype="multipart/form-data" method="POST">
-    <input type="file" name="pic" />
-    <input type="submit" value="Upload" />
-  </form>
-    <script>
-        var l = window.location.href;
-        if (l[l.length-1] == 't') {
-            <!--alert("don't render");-->
-            document.getElementById("preview").src="/static/upload.png"
-        }
-    </script>
-</body>
+            <input type="file" class="custom-file-input" name="pic" onChange="document.forms[0].submit()" />
+            <input type="button" onclick="location.href='/resultCheck'" value="Detect" style="font-size: 12px; padding: 4px" />
+        </form>
+        <script>
+            var l = window.location.href;
+            if (l[l.length - 1] == 't') {
+                // <
+                // !--alert("don't render");
+                // -- >
+                document.getElementById("preview").src = "/static/upload.png";
+            }
+        </script>
+    </body>
 
 </html>
